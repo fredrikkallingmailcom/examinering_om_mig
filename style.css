@@ -6,6 +6,8 @@
     --headline-medium-size: 1.5rem;
     --headline-small-color: #black;
     --headline-small-size: 1rem;
+
+    --footer-height: 4rem;
 }
 
 * {
@@ -19,9 +21,10 @@ body {
 /* Outer div*/
 .screen {
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
+
+    padding-bottom: var(--footer-height);
 }
 
 /* Header */
@@ -50,9 +53,64 @@ body {
 }
 
 /* Main */
-.mainscreen_content {
+.main_screen_content {
+    width:100%;
     flex-grow: 1;
     background-color: orange;
+}
+
+.main_screen_content.case_file {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.case_summary {
+    width:100%;    
+    background-color: green;
+}
+
+.case_menu {
+    width:100%;
+    background-color: blue;
+}
+
+.case_menu nav ul {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+}
+
+.case_menu a {
+    color:yellow;
+    border:2px solid black;
+    padding:1rem;
+    display:flex;
+    align-items:center;
+    gap: 0.50rem;
+}
+
+.case_messages {
+    background-color: aquamarine;
+    display: flex;
+    align-items:center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.mail_headline {
+    margin:0;
+    padding:0;
+}
+
+#mail_icon {
+    width: 3rem;
+    height: auto;
 }
 
 /* Footer */
@@ -60,6 +118,32 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    right:0;
+    right: 0;
     background-color: blueviolet;
+
+    min-height: var(--footer-height);
 }
+
+/*
+.case_menu ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 48rem) {
+    .case_menu ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 64rem) {
+    .case_menu ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+*/

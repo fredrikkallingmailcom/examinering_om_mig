@@ -22,7 +22,7 @@
                 <a href="file.html"></a>
             </nav>
         </header>
-        <main class="mainscreen_content case_file">
+        <main class="main_screen_content case_file">
             <section class="case_summary">
                 <div>
                     <h1>CASE FILE #KALLIN-1980</h1>
@@ -31,23 +31,28 @@
                     </blockquote>
                     <figure>
                         <h2>Status</h2>
-                        <img src="statusbar" alt="casefile_completed">
+                        <img src="statusbar" alt="casefile_completed" id="summary_statusbar">
+                        <figcaption>The statusbar</figcaption>
                     </figure>
                 </div>
             </section>
             <section class="case_menu">
                 <nav aria-label="Main system menu">
                     <ul>
-                        <li><<a href="case-file.html">>Case Files</a></li>
-                        <li><a href="evidence.html">Evidence</a></li>
-                        <li><a href="terminal.html">Terminal</a></li>
-                        <li><a href="photos.html">Photos</a></li>
-                        <li><a href="notes.html">archive</a></li>
+                        <li><a href="case_file.html"><img src="case_files.png" alt="case_files_icon">Case files</a></li>
+                        <li><a href="evidence.html"><img src="evidence.png" alt="evidence_icon">Evidence</a></li>
+                        <li><a href="terminal.html"><img src="terminal.png" alt="terminal_icon">Terminal</a></li>
+                        <li><a href="photos.html"><img src="photos.png" alt="photos_icon">Photos</a></li>
+                        <li><a href="notes.html"><img src="notes.png" alt="notes_icon">Notes</a></li>
                     </ul>
                 </nav>
             </section>
-            <section class="case_related_messages">
-
+            <section class="case_messages">
+                <img src="mail_icon.png" alt="mail_icon" id="mail_icon">
+                <div>
+                    <h3 class="mail_headline">Hello</h3>
+                    <p class="mail_message">Hello, my name is ... and ...</p>
+                </div>
             </section>
         </main>
         <footer class="status_bar">
@@ -55,4 +60,5 @@
         </footer>
     </div>
 </body>
+
 </html>
