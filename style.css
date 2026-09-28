@@ -75,7 +75,7 @@ body {
 }
 
 .system_name {
-
+    font-weight: bold;
 }
 
 .system_status {
@@ -90,8 +90,10 @@ body {
 
 /* Main - This one is used for all main-screens. */
 .main_screen_content {
-    width: 100%;
     flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
     background-color: orange;
 }
 
@@ -99,13 +101,16 @@ body {
 .main_screen_content.case_file {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.5rem;
-    align-items: center;
+    gap: 0rem;
+    align-items: top;
 }
 
 .case_summary {
-    width: 100%;
+    color: white;
     background-color: green;
+
+    flex: 1;
+
     background-image: url("images/background_case_file.png");
     background-size: cover;
     background-position: center;
@@ -113,22 +118,33 @@ body {
 }
 
 /*Behöver bli av med marginen som bloq och figure har inneboende */
-.case_summary h1,
-.case_summary blockquote,
-.case_summary figure {
+.case_summary * {
     margin-inline: 0;
-    padding-inline: 1rem;
+    padding-inline: 0.75rem;
+}
+
+.case_summary div ul {
+    list-style: none;
+    position:relative; 
+    left: 1rem;
+}
+
+.case_summary div li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
 }
 
 .case_menu {
-    width: 100%;
-    background-color: blue;
+    background-color: black;
 }
 
 .case_menu nav ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 1rem;
+    align-items: center;
+    align-content: center;
 
     list-style: none;
     margin: 0;

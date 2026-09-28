@@ -13,7 +13,7 @@
 <body>
     <div class="screen">
         <header class="system_bar">
-            <p class="system_name">KOS 1.0</p>
+            <p class="system_name">K-OS 1.0</p>
             <time class="system_time" datetime="">
                 14:02
             </time>
@@ -25,24 +25,31 @@
         </header>
         <main class="main_screen_content case_file">
             <section class="case_summary">
-                <div>
                     <h1>CASE FILE #KALLIN-1980</h1>
                     <blockquote>
                         <p>"It all began..."</p>
                     </blockquote>
-                    <figure>
-                        <h2>Status</h2>
-                        <img src="statusbar" alt="casefile_completed" id="summary_statusbar">
-                        <figcaption>The statusbar</figcaption>
-                    </figure>
-                </div>
+                    <h2>Status</h2>
+                    <label>Status</label>
+                    <progress id="status-progress" value="10" max="100">10%</progress>
+                    <span id="status-recovery-text">10%</span>
+                    <hr class="simple_divider">
+                    <h2>Hints</h2>
+                    <ul role="list">
+                        <li>Check images</li>
+                        <li>Look outside the box</li>
+                        <li>Everything is connected</li>
+                    </ul>
             </section>
             <section class="case_menu">
                 <nav aria-label="Main system menu">
                     <ul>
-                        <li><a href="case_file.html"><img src="images/case_file.png" alt="case_files_icon">[Case files]</a></li>
-                        <li><a href="evidence.html"><img src="images/evidence.png" alt="evidence_icon">[Evidence]</a></li>
-                        <li><a href="terminal.html"><img src="images/terminal.png" alt="terminal_icon">[Terminal]</a></li>
+                        <li><a href="case_file.html"><img src="images/case_file.png" alt="case_files_icon">[Case
+                                files]</a></li>
+                        <li><a href="evidence.html"><img src="images/evidence.png" alt="evidence_icon">[Evidence]</a>
+                        </li>
+                        <li><a href="terminal.html"><img src="images/terminal.png" alt="terminal_icon">[Terminal]</a>
+                        </li>
                         <li><a href="photos.html"><img src="images/photos.png" alt="photos_icon">[Photos]</a></li>
                         <li><a href="notes.html"><img src="images/notes.png" alt="notes_icon">[Notes]</a></li>
                     </ul>
