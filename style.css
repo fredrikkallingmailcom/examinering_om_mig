@@ -21,7 +21,6 @@ body {
     margin: 0;
 
     background-color: #020707;
-
     color: var(--text-main);
 
     font-family:
@@ -277,6 +276,41 @@ body {
 
     min-height: var(--footer-height);
 }
+
+/* TERMINAL */
+.terminal {
+    color: white;
+    padding: 0.5rem;
+    font: inherit;
+}
+
+.terminal_output {
+    
+}
+
+.terminal_output ul {
+    list-style: none;
+    left: 0rem;
+    margin:0;
+    padding: 0;
+}
+
+.terminal_output li {
+    white-space: pre-wrap;
+}
+
+#terminal_input {
+    background: transparent;
+    border: none;
+    outline:none;
+    color: white;
+    caret-color: white;
+    font: inherit;
+}
+
+
+
+/* Media */
 
 @media (max-width: 393px) {
     .case_menu_nav ul {
