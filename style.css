@@ -284,24 +284,24 @@ body {
     font: inherit;
 }
 
-.terminal_output {
+.terminal_output_input {
     
 }
 
-.terminal_output ul {
+.terminal_output_input ul {
     list-style: none;
     left: 0rem;
     margin:0;
     padding: 0;
 }
 
-.terminal_output li {
+.terminal_output_input li {
     white-space: pre-wrap;
 }
 
-#terminal_input {
+.terminal_input {
     background: transparent;
-    border: none;
+    border: 1px solid white;
     outline:none;
     color: white;
     caret-color: white;

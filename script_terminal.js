@@ -109,7 +109,7 @@ const terminalHistory = [
 
 //printTerminal(terminalHistory);
 renderTerminalHistory(terminalHistory);
-
+/*
 terminalInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         if (terminalInput.value.length === 0) return;
@@ -117,19 +117,21 @@ terminalInput.addEventListener("keydown", (event) => {
         addPromptEventToHistory(terminalInput);
         terminalInput.value = "";
     }
-})
+});
+*/
 
 function addPromptEventToHistory(input) {
     let historyObject = {
         id: terminalHistory.length,
         currentDirectoryPath: currentDirectoryPath,
-
         input: input.value
     };
 
-    terminalHistory.push(historyObject);
+    input.remove();
 
-    renderTerminalRow(historyObject);
+    terminalHistory[terminalHistory.length - 1] = historyObject;
+
+    renderTerminalHistory(terminalHistory);
     parseString(input.value);
 }
 
@@ -141,6 +143,7 @@ function addToHistory(row = "", command) { // TO ADD TO HISTORY THAT`S NOT A DIR
     };
 
     terminalHistory.push(historyObject);
+
     renderTerminalRow(historyObject, command);
 }
 
@@ -148,27 +151,66 @@ function addToHistory(row = "", command) { // TO ADD TO HISTORY THAT`S NOT A DIR
 function renderTerminalHistory(history, command) {
     terminalOutputList.innerHTML = "";
 
-    history.forEach((row) => {
-        let outputRow = document.createElement("li");
+    history.forEach((row, index) => {
+        let outputLi = document.createElement("li");
+        let input = document.createElement("input");
+
         if (command == COMMANDS.DIR) {
-            outputRow.textContent = row.input;
+            outputLi.textContent = row.input;
         } else {
-            outputRow.textContent = row.currentDirectoryPath + "\\" + row.input + ">";
+            outputLi.textContent = row.currentDirectoryPath + "\\>" + row.input;
+        }
+
+
+        // Only the last empty row gets an input field
+        if (index === history.length - 1 && row.input === "") {
+            let input = document.createElement("input");
+
+            input.setAttribute("aria-label", "terminal input");
+            input.classList.add("terminal_input");
+
+            addEventListener(input);
+
+            outputLi.appendChild(input);
         }
         /* add css with classlist */
-        terminalOutputList.appendChild(outputRow);
+        terminalOutputList.appendChild(outputLi);
+    });
+}
+
+function addEventListener(input) {
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            if (input.value.length === 0) return;
+
+            addPromptEventToHistory(input);
+            input.value = "";
+        }
     });
 }
 
 /* Renders the newly written row */
 function renderTerminalRow(row, command) {
-    const outputRow = document.createElement("li");
+    let outputLi = document.createElement("li");
+
     if (command == COMMANDS.DIR) {
-        outputRow.textContent = row.input;
+        outputLi.textContent = row.input;
     } else {
-        outputRow.textContent = row.currentDirectoryPath + "\\" + row.input;
+        outputLi.textContent = row.currentDirectoryPath + "\\>" + row.input;
     }
-    terminalOutputList.appendChild(outputRow);
+
+    if (row.input === "") {
+        let input = document.createElement("input");
+
+        input.setAttribute("aria-label", "terminal input");
+        input.classList.add("terminal_input");
+
+        addEventListener(input);
+
+        outputLi.appendChild(input);
+    }
+
+    terminalOutputList.appendChild(outputLi);
 }
 
 function parseString(string) {
@@ -250,22 +292,24 @@ function loopFileTree(
                 console.log("Has no currentdirectory");
             }*/
 
-            if (navigationMode === COMMANDS.CD_DOWN) { //NAV = CD + FOLDER/DIRECTORY, Go down
+            if (navigationMode === COMMANDS.CD_DOWN) {
                 if (
                     targetFolderName === folderName.toLowerCase().trim() &&
                     parentFolderPath === currentDirectoryPath
                 ) {
                     currentDirectoryPath = currentFolderPath;
-                    addToHistory("", COMMANDS.CD_DOWN);
+
+                    addToHistory(); // TOM RAD = NY PROMPT
                 }
 
-            } else if (navigationMode === COMMANDS.CD_UP) { // NAV CD.. Go up
+            } else if (navigationMode === COMMANDS.CD_UP) {
                 if (
                     currentFolderPath === currentDirectoryPath &&
                     parentFolderPath !== ""
                 ) {
                     currentDirectoryPath = parentFolderPath;
-                    addToHistory("", COMMANDS.CD_UP);
+
+                    addToHistory(); // TOM RAD = NY PROMPT
                 }
             } else if (navigationMode === COMMANDS.DIR) {
                 if (currentFolderPath === currentDirectoryPath) {
