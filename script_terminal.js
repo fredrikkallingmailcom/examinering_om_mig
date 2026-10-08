@@ -12,7 +12,8 @@ const COMMANDS = {
     CD_UP: "cd..",
     DIR: "dir",
     HELP: "help",
-    TYPE: "type"
+    TYPE: "type",
+    EXE: ".exe"
 };
 
 const commands = [
@@ -24,7 +25,7 @@ const commands = [
     }, {
         id: 1,
         name: "type",
-        description: "this command will tell you about / and open up things",
+        description: "this command allows you to run a text-file",
         command: "type"
     }, {
         id: 2,
@@ -59,7 +60,7 @@ const fileTree = {
             fredrik: {
                 desktop: {
                     "notes.txt": "This is a long text about nothing!",
-                    "case_file": [
+                    "case_file.txt": [
                         "Page 1: This is page one",
                         "Page 2: This is the second page"
                     ]
@@ -103,6 +104,7 @@ const terminalHistory = [
     {
         id: 0,
         currentDirectoryPath: "c:",
+        command: "",
         input: ""
     }
 ];
@@ -139,6 +141,7 @@ function addToHistory(row = "", command) { // TO ADD TO HISTORY THAT`S NOT A DIR
     const historyObject = {
         id: terminalHistory.length,
         currentDirectoryPath: currentDirectoryPath,
+        command: command,
         input: row
     };
 
@@ -153,9 +156,8 @@ function renderTerminalHistory(history, command) {
 
     history.forEach((row, index) => {
         let outputLi = document.createElement("li");
-        let input = document.createElement("input");
 
-        if (command == COMMANDS.DIR) {
+        if (row.command == COMMANDS.DIR) {
             outputLi.textContent = row.input;
         } else {
             outputLi.textContent = row.currentDirectoryPath + "\\>" + row.input;
@@ -216,8 +218,11 @@ function renderTerminalRow(row, command) {
 function parseString(string) {
     const input = string.toLowerCase().trim();
 
+    let commandFound = false;
+
     commands.forEach((command) => {
         if (input === command.command || input.startsWith(command.command + " ")) {
+            commandFound = true;
             if (input === COMMANDS.CD_UP) {
                 changeDirectory(COMMANDS.CD_UP);
             } else if (input.startsWith(COMMANDS.CD_DOWN)) {
@@ -236,11 +241,19 @@ function parseString(string) {
                 console.log("in type");
             }
         }
-
     });
+
+    if (!commandFound) {
+        addToHistory();
+    }
 }
 
 function changeDirectory(navMode, targetDirectoryName) {
+    if (navMode === COMMANDS.CD_UP && currentDirectoryPath === "c:") {
+        addToHistory();
+        return;
+    }
+
     loopFileTree(fileTree, null, targetDirectoryName, "", navMode);
 }
 
@@ -292,6 +305,8 @@ function loopFileTree(
                 console.log("Has no currentdirectory");
             }*/
 
+
+
             if (navigationMode === COMMANDS.CD_DOWN) {
                 if (
                     targetFolderName === folderName.toLowerCase().trim() &&
@@ -313,16 +328,15 @@ function loopFileTree(
                 }
             } else if (navigationMode === COMMANDS.DIR) {
                 if (currentFolderPath === currentDirectoryPath) {
-                    addToHistory(" Volume in drive C is Windows-SSD \n Volume Serial Number is 0A4B-C164\n\n" +
+                    addToHistory("\n Volume in drive C is Windows-SSD \n Volume Serial Number is 0A4B-C164\n\n" +
                         " Directory of " + currentDirectoryPath + "\n\n", COMMANDS.DIR);
                     Object.keys(folderContents).forEach((itemsName) => {
-                        console.log(itemsName);
-                        addToHistory(itemsName);
+                        addToHistory(" " + getCurrentDateTime() + " " + itemsName, COMMANDS.DIR);
                     });
                     addToHistory();
                 }
             }
-
+            console.log("1. folderContents: ", folderContents);
             /*                               console.log("____________");
                                 console.log("1. folderContents: ", folderContents);
             
@@ -348,6 +362,22 @@ function loopFileTree(
             ); //rekursiv loop som går igenom nästa steg av fältet av objekts
         }
     });
+}
+
+//Used when printing a directory
+function getCurrentDateTime() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+
+    const dateTime = `${year} - ${month}-${day} ${hours}:${minutes}`;
+
+    return String(dateTime);
 }
 
 function help() {
