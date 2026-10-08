@@ -13,7 +13,7 @@ const COMMANDS = {
     DIR: "dir",
     HELP: "help",
     TYPE: "type",
-    EXE: ".exe"
+    RUN: ".exe"
 };
 
 const commands = [
@@ -62,7 +62,8 @@ const fileTree = {
                     "notes.txt": "This is a long text about nothing!",
                     "case_file.txt": [
                         "Page 1: This is page one",
-                        "Page 2: This is the second page"
+                        "Page 2: This is the second page",
+                        "Page 3: This is the third page"
                     ]
                 }
             },
@@ -86,17 +87,30 @@ const fileTree = {
         },
         Windows: {
             System32: {
-
+                "cmd.exe": {
+                    description: "Opens a command-line window.",
+                    action: ["Open", "Command prompt"]
+                },
+                "notepad.exe": {
+                    description: "Opens Notepad.",
+                    action: ["Open", "Notepad"]
+                }
             },
             Temp: {
 
+            },
+            "explorer.exe": {
+                description: "Opens File Explorer or starts the Windows shell.",
+                action: ["Open", "File browser"]
+            },
+            "regedit.exe": {
+                description: "Opens the Windows Registry Editor.",
+                action: ["Open", "Registry Editor"]
             }
         },
-        ProgramData: {}
-    },
+        ProgramData: {
 
-    d: {
-
+        }
     }
 }
 
@@ -174,20 +188,11 @@ function renderTerminalHistory(history, command) {
             addEventListener(input);
 
             outputLi.appendChild(input);
+
+            input.focus();
         }
         /* add css with classlist */
         terminalOutputList.appendChild(outputLi);
-    });
-}
-
-function addEventListener(input) {
-    input.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            if (input.value.length === 0) return;
-
-            addPromptEventToHistory(input);
-            input.value = "";
-        }
     });
 }
 
@@ -210,9 +215,21 @@ function renderTerminalRow(row, command) {
         addEventListener(input);
 
         outputLi.appendChild(input);
+        input.focus();
     }
 
     terminalOutputList.appendChild(outputLi);
+}
+
+function addEventListener(input) {
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            if (input.value.length === 0) return;
+
+            addPromptEventToHistory(input);
+            input.value = "";
+        }
+    });
 }
 
 function parseString(string) {
@@ -224,12 +241,12 @@ function parseString(string) {
         if (input === command.command || input.startsWith(command.command + " ")) {
             commandFound = true;
             if (input === COMMANDS.CD_UP) {
-                changeDirectory(COMMANDS.CD_UP);
+                changeDirectory("", COMMANDS.CD_UP);
             } else if (input.startsWith(COMMANDS.CD_DOWN)) {
                 const folder = input.slice(3);
 
                 if (folder.length >= 1) {
-                    changeDirectory(COMMANDS.CD_DOWN, folder);
+                    changeDirectory(folder, COMMANDS.CD_DOWN);
                 }
             } else if (input === COMMANDS.CLS) {
                 console.log("in cls");
@@ -237,8 +254,14 @@ function parseString(string) {
                 listDirectory(COMMANDS.DIR);
             } else if (input === COMMANDS.HELP) {
                 console.log("in help");
-            } else if (input === COMMANDS.TYPE) {
-                console.log("in type");
+            } else if (input.startsWith(COMMANDS.TYPE)) {
+                const file = input.slice(5);
+                console.log("file: " + file);
+                if (file.length >= 1) {
+                    readFile(file, COMMANDS.TYPE);
+                }
+            } else if (input.split(".").pop() === COMMANDS.RUN) {
+                runFile(input, COMMANDS.RUN);
             }
         }
     });
@@ -248,25 +271,47 @@ function parseString(string) {
     }
 }
 
-function changeDirectory(navMode, targetDirectoryName) {
-    if (navMode === COMMANDS.CD_UP && currentDirectoryPath === "c:") {
+function readFile(file, commandMode) {
+    console.log("readfile " + file + " " + commandMode);
+    navigateFileSystem(fileTree, null, file, null, commandMode);
+    addToHistory();
+}
+
+function runFile(file) {
+    addToHistory();
+}
+
+function changeDirectory(targetDirectoryName, commandMode) {
+    const oldDirectoryPath = currentDirectoryPath;
+
+    if (commandMode === COMMANDS.CD_UP &&
+        currentDirectoryPath === "c:"
+    ) {
         addToHistory();
+        console.log("changeDirectory if");
         return;
     }
 
-    loopFileTree(fileTree, null, targetDirectoryName, "", navMode);
+    navigateFileSystem(fileTree, null, targetDirectoryName, null, commandMode);
+
+    if (
+        commandMode === COMMANDS.CD_DOWN &&
+        currentDirectoryPath === oldDirectoryPath
+    ) {
+        addToHistory();
+    }
 }
 
 function listDirectory(navMode) {
-    loopFileTree(fileTree, null, "", "", navMode);
+    navigateFileSystem(fileTree, null, null, "", navMode);
 }
 
-function loopFileTree(
+function navigateFileSystem(
     currentFolderContents, /* What is inside the current folder */
     parentFolderName = null, /* Name of the folder above */
-    targetFolderName, /* Folder we want to find */
-    parentFolderPath = "", /* Path to the folder above */
-    navigationMode = null /* 1 = go in, 0 = go back,  */
+    targetName, /* Folder/file we want to find/use */
+    parentFolderPath = null, /* Path to the folder above */
+    commandMode = null /* 1 = go down in new dir, 0 = go back up in prev dir, 2 = list directory */
 ) {
     //En rekursiv funktion/metod som rekursivt går igenom "directoriet" =
     // ett fält av objekt och variabler (som representerar värdena i).
@@ -281,8 +326,7 @@ function loopFileTree(
         // 2. det INTE är NULL
         // 3. och INTE är ett FÄLT/en ARRAY.
         if (typeof folderContents === "object" &&
-            folderContents != null &&
-            !Array.isArray(folderContents)) {
+            folderContents != null) {
 
             //Skapar här en ny variable med namnet newPath för att skapa den nya
             // pathen och samtidigt "spara" den gamla pathen
@@ -305,19 +349,17 @@ function loopFileTree(
                 console.log("Has no currentdirectory");
             }*/
 
-
-
-            if (navigationMode === COMMANDS.CD_DOWN) {
+            if (commandMode === COMMANDS.CD_DOWN) {
                 if (
-                    targetFolderName === folderName.toLowerCase().trim() &&
+                    targetName === folderName.toLowerCase().trim() &&
                     parentFolderPath === currentDirectoryPath
                 ) {
                     currentDirectoryPath = currentFolderPath;
 
                     addToHistory(); // TOM RAD = NY PROMPT
                 }
-
-            } else if (navigationMode === COMMANDS.CD_UP) {
+            } else if (commandMode === COMMANDS.CD_UP) {
+                console.log(" folderEntries.forEach");
                 if (
                     currentFolderPath === currentDirectoryPath &&
                     parentFolderPath !== ""
@@ -326,7 +368,7 @@ function loopFileTree(
 
                     addToHistory(); // TOM RAD = NY PROMPT
                 }
-            } else if (navigationMode === COMMANDS.DIR) {
+            } else if (commandMode === COMMANDS.DIR) {
                 if (currentFolderPath === currentDirectoryPath) {
                     addToHistory("\n Volume in drive C is Windows-SSD \n Volume Serial Number is 0A4B-C164\n\n" +
                         " Directory of " + currentDirectoryPath + "\n\n", COMMANDS.DIR);
@@ -335,8 +377,29 @@ function loopFileTree(
                     });
                     addToHistory();
                 }
+            } else if (
+                commandMode === COMMANDS.TYPE &&
+                targetName !== ""
+            ) {
+                Object.keys(folderContents).forEach((itemsName) => {
+                    const extention = targetName.split(".").pop();
+                    if (itemsName === targetName && extention === "txt") {
+
+                        if (Array.isArray(folderContents[itemsName])) {
+                            addToHistory("\n File: " + targetName + "\n " + folderContents[itemsName].join("\n "));
+                        } else {
+                            addToHistory("\n " + folderContents[itemsName]);
+                        }
+                    }
+                });
+            } else if (
+                commandMode == COMMANDS.RUN &&
+                targetName !== ""
+            ) {
+                Object.keys(folderContents).forEach((itemsName) => {
+                    const extention = targetName.split(".").pop();
+                });
             }
-            console.log("1. folderContents: ", folderContents);
             /*                               console.log("____________");
                                 console.log("1. folderContents: ", folderContents);
             
@@ -353,12 +416,12 @@ function loopFileTree(
             */
 
             //Directory trädet, parent, target Directory Name, nuvarande path
-            loopFileTree(
+            navigateFileSystem(
                 folderContents,
                 folderName,
-                targetFolderName,
+                targetName,
                 currentFolderPath,
-                navigationMode
+                commandMode
             ); //rekursiv loop som går igenom nästa steg av fältet av objekts
         }
     });
