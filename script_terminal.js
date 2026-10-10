@@ -1,8 +1,16 @@
+//Forces the browser to scroll down. Used when the window is too big.
+/*setInterval(function () {
+    window.scrollTo(0, document.body.scrollHeight);
+}, 100);*/
+
 // VARIABLES + ARRAYS //
 // QUERYSELECTORS / GETELEMENTSBYID //
 
 const terminalOutputList = document.querySelector("#terminal_output_list");
 const terminalInput = document.querySelector("#terminal_input");
+const terminalWindow = document.querySelector("#terminal_window");
+const closeTerminalButton = document.querySelector("#close_terminal");
+
 
 /* "help", "about", "clear","date", "projects", "contact" */
 
@@ -13,7 +21,7 @@ const COMMANDS = {
     DIR: "dir",
     HELP: "help",
     TYPE: "type",
-    RUN: ".exe"
+    RUN: "exe"
 };
 
 const commands = [
@@ -89,11 +97,11 @@ const fileTree = {
             System32: {
                 "cmd.exe": {
                     description: "Opens a command-line window.",
-                    action: ["Open", "Command prompt"]
+                    action: ["Open", "cmd"]
                 },
                 "notepad.exe": {
                     description: "Opens Notepad.",
-                    action: ["Open", "Notepad"]
+                    action: ["Open", "notepad"]
                 }
             },
             Temp: {
@@ -101,11 +109,11 @@ const fileTree = {
             },
             "explorer.exe": {
                 description: "Opens File Explorer or starts the Windows shell.",
-                action: ["Open", "File browser"]
+                action: ["Open", "explorer"]
             },
             "regedit.exe": {
                 description: "Opens the Windows Registry Editor.",
-                action: ["Open", "Registry Editor"]
+                action: ["Open", "regedit"]
             }
         },
         ProgramData: {
@@ -171,7 +179,7 @@ function renderTerminalHistory(history, command) {
     history.forEach((row, index) => {
         let outputLi = document.createElement("li");
 
-        if (row.command == COMMANDS.DIR) {
+        if (row.command == COMMANDS.DIR || row.command == COMMANDS.HELP) {
             outputLi.textContent = row.input;
         } else {
             outputLi.textContent = row.currentDirectoryPath + "\\>" + row.input;
@@ -200,7 +208,7 @@ function renderTerminalHistory(history, command) {
 function renderTerminalRow(row, command) {
     let outputLi = document.createElement("li");
 
-    if (command == COMMANDS.DIR) {
+    if (command == COMMANDS.DIR || command == COMMANDS.HELP) {
         outputLi.textContent = row.input;
     } else {
         outputLi.textContent = row.currentDirectoryPath + "\\>" + row.input;
@@ -234,8 +242,15 @@ function addEventListener(input) {
 
 function parseString(string) {
     const input = string.toLowerCase().trim();
+    const extention = input.split(".").pop();
 
     let commandFound = false;
+
+    /* if (extention === COMMANDS.RUN) {
+         commandFound = true;
+         runFile(input, COMMANDS.RUN);
+         return;
+     }*/
 
     commands.forEach((command) => {
         if (input === command.command || input.startsWith(command.command + " ")) {
@@ -253,18 +268,21 @@ function parseString(string) {
             } else if (input === COMMANDS.DIR) {
                 listDirectory(COMMANDS.DIR);
             } else if (input === COMMANDS.HELP) {
-                console.log("in help");
+                help();
             } else if (input.startsWith(COMMANDS.TYPE)) {
                 const file = input.slice(5);
                 console.log("file: " + file);
                 if (file.length >= 1) {
                     readFile(file, COMMANDS.TYPE);
                 }
-            } else if (input.split(".").pop() === COMMANDS.RUN) {
-                runFile(input, COMMANDS.RUN);
             }
         }
     });
+
+    if (!commandFound && extention === COMMANDS.RUN) {
+        commandFound = true;
+        runFile(input, COMMANDS.RUN);
+    }
 
     if (!commandFound) {
         addToHistory();
@@ -277,7 +295,16 @@ function readFile(file, commandMode) {
     addToHistory();
 }
 
-function runFile(file) {
+function runFile(file, commandMode) {
+    navigateFileSystem(fileTree, null, file, null, commandMode);
+    addToHistory();
+}
+
+function help() {
+    console.log("in help-function");
+    commands.forEach((command, index) => {
+        addToHistory(command.id + ". " + command.command.toUpperCase() + ", " + command.description, COMMANDS.HELP);
+    });
     addToHistory();
 }
 
@@ -384,12 +411,12 @@ function navigateFileSystem(
                 Object.keys(folderContents).forEach((itemsName) => {
                     const extention = targetName.split(".").pop();
                     if (itemsName === targetName && extention === "txt") {
-
                         if (Array.isArray(folderContents[itemsName])) {
                             addToHistory("\n File: " + targetName + "\n " + folderContents[itemsName].join("\n "));
                         } else {
-                            addToHistory("\n " + folderContents[itemsName]);
+                            addToHistory("\n File: " + targetName + "\n " + folderContents[itemsName]);
                         }
+                        return true;
                     }
                 });
             } else if (
@@ -398,6 +425,21 @@ function navigateFileSystem(
             ) {
                 Object.keys(folderContents).forEach((itemsName) => {
                     const extention = targetName.split(".").pop();
+                    if (itemsName === targetName && extention === "exe") {
+                        console.log("found " + targetName);
+                        console.log("itemsName.description: " + folderContents[itemsName].description);
+                        if (folderContents[itemsName].action[0].toLowerCase() === "open") {
+
+                            let program = folderContents[itemsName].action[1].toLowerCase();
+                            if (program === "notedpad" || program === "cmd" || program === "explorer" || program === "regedit") {
+                                console.log("in if: " + program);
+
+                                executeProgram(program);
+                            }
+                        }
+                    } else {
+                        console.log("could not find");
+                    }
                 });
             }
             /*                               console.log("____________");
@@ -427,6 +469,19 @@ function navigateFileSystem(
     });
 }
 
+function executeProgram(program) {
+
+    if (program === "notedpad") {
+        popup.classList.add("show");
+    } else if (program === "cmd") {
+        popup.classList.add("show");
+    } else if (program === "explorer") {
+        popup.classList.add("show");
+    } else if (program === "regedit") {
+        popup.classList.add("show");
+    }
+}
+
 //Used when printing a directory
 function getCurrentDateTime() {
     const now = new Date();
@@ -443,6 +498,12 @@ function getCurrentDateTime() {
     return String(dateTime);
 }
 
-function help() {
+const closeButton = document.querySelector(".close-popup");
 
-}
+closeButton.addEventListener("click", () => {
+    popup.classList.remove("show");
+});
+
+closeTerminalButton.addEventListener("click", () => {
+    terminalWindow.classList.add("close");
+})

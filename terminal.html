@@ -24,25 +24,119 @@
                 <a href="terminal.html">Terminal</a>
             </nav>
         </header>
-        <main class="main_screen_content terminal">
-            <section class="terminal">
-                <h2>Command Prompt</h2>
-                <p>
-                    Fredsoft Frindows [Version 11.0.23200.9457]
-                    (c) Fredsoft Corporation. All rights reserved.
-                </p>
-                <p>
-                    Help: write 'help' in the terminal to print all commands.
-                </p>
-                <div class="terminal_output_input">
-                    <ul id="terminal_output_list">
-                    </ul>
-                </div>
+        <main class="main_screen_content terminal_desktop">
+            <section id="terminal_window" class="terminal_window">
+                <header class="terminal_titlebar">
+                    <p class="terminal_tab">
+                        <span>▰</span>
+                        <span>Command Prompt</span>
+                    </p>
+                    <div class="terminal_window_buttons">
+                        <button type="button">-</button>
+                        <button type="button">□</button>
+                        <button type="button" id="close_terminal">x</button>
+                    </div>
+                </header>
+                <section class="terminal">
+                    <h2>Command Prompt</h2>
+                    <p>
+                        Fredsoft Frindows [Version 11.0.23200.9457]
+                        (c) Fredsoft Corporation. All rights reserved.
+                    </p>
+                    <p>
+                        Help: write 'help' in the terminal to print all commands.
+                    </p>
+                    <div class="terminal_output_input">
+                        <ul id="terminal_output_list"></ul>
+                    </div>
+                </section>
             </section>
         </main>
         <footer class="status_bar">
             <p>> System recovery interrupted.</p>
         </footer>
+    </div>
+    <!-- Pop-up window- ai genereated. Didn´t have time :( -->
+    <div id="popup" class="popup">
+        <div class="explorer-window">
+
+            <div class="explorer-titlebar">
+                <div class="explorer-tab">
+                    🏠
+                    <span>Home</span>
+                    <span class="tab-close">×</span>
+                </div>
+
+                <span class="new-tab">+</span>
+
+                <div class="window-buttons">
+                    <button>−</button>
+                    <button>□</button>
+                    <button class="close-popup">×</button>
+                </div>
+            </div>
+
+            <div class="explorer-addressbar">
+                <span>←</span>
+                <span>→</span>
+                <span>↑</span>
+                <span>↻</span>
+
+                <div class="address">
+                    🏠　›　Home
+                </div>
+
+                <div class="search">
+                    Search Home　⌕
+                </div>
+            </div>
+
+            <div class="explorer-toolbar">
+                <span>＋ New</span>
+                <span>✂</span>
+                <span>▣</span>
+                <span>▢</span>
+                <span>Sort⌄</span>
+                <span>View⌄</span>
+                <span>•••</span>
+            </div>
+
+            <div class="explorer-body">
+
+                <aside class="explorer-sidebar">
+                    <p class="selected">🏠 Home</p>
+                    <p>🖼 Gallery</p>
+                    <p>☁ Fredrik</p>
+
+                    <hr>
+
+                    <p>🖥 Desktop</p>
+                    <p>↓ Downloads</p>
+                    <p>📄 Documents</p>
+                    <p>🖼 Pictures</p>
+                    <p>♫ Music</p>
+                </aside>
+
+                <main class="explorer-files">
+                    <h3>⌄ Quick access</h3>
+
+                    <div class="folder-grid">
+                        <div>📁 <span>Desktop</span></div>
+                        <div>📁 <span>Downloads</span></div>
+                        <div>📁 <span>Documents</span></div>
+                        <div>📁 <span>Pictures</span></div>
+                        <div>📁 <span>Music</span></div>
+                        <div>📁 <span>Videos</span></div>
+                    </div>
+                </main>
+
+            </div>
+
+            <div class="explorer-status">
+                31 items
+            </div>
+
+        </div>
     </div>
 </body>
 
