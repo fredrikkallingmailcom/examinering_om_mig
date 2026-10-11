@@ -519,7 +519,7 @@ button:focus-visible {
     overflow: hidden;
 }
 
-.terminal_window\.close {
+.terminal_window.close {
     display: none;
 }
 
