@@ -500,12 +500,6 @@ function getCurrentDateTime() {
     return String(dateTime);
 }
 
-const closeButton = document.querySelector(".close-popup");
-
-closeButton.addEventListener("click", () => {
-    popup.classList.remove("show");
-});
-
 closeTerminalButton.addEventListener("click", () => {
     terminalWindow.classList.add("close");
 })
