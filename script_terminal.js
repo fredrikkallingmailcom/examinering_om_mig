@@ -247,12 +247,6 @@ function parseString(string) {
 
     let commandFound = false;
 
-    /* if (extention === COMMANDS.RUN) {
-         commandFound = true;
-         runFile(input, COMMANDS.RUN);
-         return;
-     }*/
-
     commands.forEach((command) => {
         if (input === command.command || input.startsWith(command.command + " ")) {
             commandFound = true;
