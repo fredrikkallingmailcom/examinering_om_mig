@@ -482,6 +482,8 @@ function executeProgram(program) {
     }
 }
 
+
+
 //Used when printing a directory
 function getCurrentDateTime() {
     const now = new Date();
