@@ -24,7 +24,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
+
     color: var(--text-main);
     font-family: "Courier New", "Lucida Console", Monaco, monospace;
     line-height: 1.4;
@@ -636,7 +636,7 @@ button:focus-visible {
         linear-gradient(to bottom,
             rgba(0, 0, 0, 0.3),
             rgba(0, 0, 0, 0.75)),
-        url("images/desktop_background_terminal.png");
+        url("images/desktop_background.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
