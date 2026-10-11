@@ -503,4 +503,6 @@ function getCurrentDateTime() {
 
 closeTerminalButton.addEventListener("click", () => {
     terminalWindow.classList.add("close");
+    event.preventDefault();
+    window.location.replace("desktop.html");
 })

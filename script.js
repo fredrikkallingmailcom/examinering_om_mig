@@ -11,7 +11,7 @@ const backgroundsArray = [
     "images/case_file_background_office_water.png",
     "images/case_file_background_in_office.png",
     "images/case_file_background_cityscape.png",
-    "images/background_case_file.png"
+    "images/case_file_background_dojo.png"
 ];
 
 //Functioncalls
