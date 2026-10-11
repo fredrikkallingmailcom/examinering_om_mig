@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>About me</title>
+    <title>Ka-OS 1.0 - Login</title>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The mystery and answers of the question: who is Fredrik Kallin?">
     <link href="icon.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
@@ -12,21 +12,22 @@
 </head>
 
 <body>
-<main class="login_screen">
-    <div class="login_container">
-        <img src="images/index_background_4.png" alt="">
+    <main class="login_screen">
+        <div class="login_container">
+            <img src="images/index_background_4.png" alt="">
+            <!-- Will add the text clues to help with accessability (since the clues are on the image ) --> 
 
-        <form id="login_form">
-            <label for="username">Username</label>
-            <input id="username" type="text" autocomplete="username">
+            <form id="login_form"><!-- The login fields are inactive -->
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" required>
 
-            <label for="password">Password</label>
-            <input id="password" type="password" autocomplete="current-password">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" autocomplete="current password" required>
 
-            <button type="submit" aria-label="Login">Login</button>
-        </form>
-    </div>
-</main>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </main>
 </body>
 
 </html>

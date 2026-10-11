@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>About me</title>
+    <title>Ka-OS 1.0 - Desktop</title>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The mystery and answers of the question: who is Fredrik Kallin?">
-    <link href="icon.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
     <script src="script_terminal.js" defer></script>
 </head>
@@ -15,53 +14,54 @@
     <div class="screen">
         <header class="system_bar">
             <span class="system_logo">
-                <a href="index.html"><img src="images/KaOS_logo.png" id="KaOS_logo" alt="Logo"></a>
+                <a href="index.html"><img src="images/kaos_logo.png" id="kaos_logo" alt="KaOs 1.0"></a>
             </span>
-            <time class="system_time" datetime="">
+            <time class="system_time" datetime="14:02">
                 14:02
             </time>
             <p class="system_status">case-file</p>
             <nav class="system_bar_nav">
                 <a href="case_file.html">Case file</a>
-                <a href="desktop.html">Desktop</a>
+                <a href="desktop.html" aria-current="page">Desktop</a>
                 <a href="terminal.html">Terminal</a>
             </nav>
         </header>
         <main class="main_screen_content">
             <section id="desktop" class="desktop">
-                <div class="desktop_column columnOne">
-                    <button class="desktop_item">
+                <h1 class="visually_hidden">Desktop</h1>
+                <div class="desktop_column column_left">
+                    <a href="notes.html" class="desktop_item">
                         <figure>
-                            <img src="images/notes_desktop.png" class="desktop_icon" alt="Notes">
+                            <img src="images/notes_desktop.png" class="desktop_item_link" alt="">
                             <figcaption>Notes</figcaption>
                         </figure>
-                    </button>
-                    <button class="desktop_item">
+                    </a>
+                    <a href="case_file.html" class="desktop_item">
                         <figure>
-                            <img src="images/case_file_desktop.png" class="desktop_icon" alt="Case file">
+                            <img src="images/case_file_desktop.png" class="desktop_item_link" alt="">
                             <figcaption>Case file</figcaption>
                         </figure>
-                    </button>
-                    <button class="desktop_item">
+                    </a>
+                    <a href="evidence.html" class="desktop_item">
                         <figure>
-                            <img src="images/evidence_desktop.png" class="desktop_icon" alt="Evidence">
+                            <img src="images/evidence_desktop.png" class="desktop_item_link" alt="">
                             <figcaption>Evidence</figcaption>
                         </figure>
-                    </button>
+                    </a>
                 </div>
-                <div class="desktop_column columnTwo">
-                    <button class="desktop_item">
+                <div class="desktop_column column_right">
+                    <a href="terminal.html" class="desktop_item">
                         <figure>
-                            <img src="images/terminal_desktop.png" class="desktop_icon" alt="Terminal">
+                            <img src="images/terminal_desktop.png" class="desktop_item_link" alt="">
                             <figcaption>Terminal</figcaption>
                         </figure>
-                    </button>
-                    <button class="desktop_item">
+                    </a>
+                    <a href="photos.html" class="desktop_item">
                         <figure>
-                            <img src="images/photos_desktop.png" class="desktop_icon" alt="Photos">
+                            <img src="images/photos_desktop.png" class="desktop_item_link" alt="">
                             <figcaption>Photos</figcaption>
                         </figure>
-                    </button>
+                    </a>
                 </div>
             </section>
         </main>

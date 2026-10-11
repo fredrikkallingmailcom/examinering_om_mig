@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>About me</title>
+    <title>Ka-OS 1.0 - Terminal</title>
     <meta charset="UTF-8">
     <meta name="description" content="The mystery and answers of the question: who is Fredrik Kallin?">
-    <link href="icon.png" rel="icon" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
     <script src="script_terminal.js" defer></script>
@@ -24,7 +23,7 @@
             <nav class="system_bar_nav">
                 <a href="case_file.html">Case file</a>
                 <a href="desktop.html">Desktop</a>
-                <a href="terminal.html">Terminal</a>
+                <a href="terminal.html" aria-current="page">Terminal</a>
             </nav>
         </header>
         <main class="main_screen_content terminal_desktop">
@@ -35,13 +34,13 @@
                         <span>Command Prompt</span>
                     </p>
                     <div class="terminal_window_buttons">
-                        <button type="button">-</button>
-                        <button type="button">□</button>
-                        <button type="button" id="close_terminal">x</button>
+                        <button type="button aria-label="Minimize">-</button>
+                        <button type="button" aria-label="Maximize">□</button>
+                        <button type="button" id="close_terminal" arial-label="Close">x</button>
                     </div>
                 </header>
                 <section class="terminal">
-                    <h2>Command Prompt</h2>
+                    <h1>Command Prompt</h1>
                     <p>
                         Fredsoft Frindows [Version 11.0.23200.9457]
                         (c) Fredsoft Corporation. All rights reserved.
@@ -58,88 +57,6 @@
         <footer class="status_bar">
             <p>> System recovery interrupted.</p>
         </footer>
-    </div>
-    <!-- Pop-up window- ai genereated. Didn´t have time :( -->
-    <div id="popup" class="popup">
-        <div class="explorer-window">
-
-            <div class="explorer-titlebar">
-                <div class="explorer-tab">
-                    🏠
-                    <span>Home</span>
-                    <span class="tab-close">×</span>
-                </div>
-
-                <span class="new-tab">+</span>
-
-                <div class="window-buttons">
-                    <button>−</button>
-                    <button>□</button>
-                    <button class="close-popup">×</button>
-                </div>
-            </div>
-
-            <div class="explorer-addressbar">
-                <span>←</span>
-                <span>→</span>
-                <span>↑</span>
-                <span>↻</span>
-
-                <div class="address">
-                    🏠　›　Home
-                </div>
-
-                <div class="search">
-                    Search Home　⌕
-                </div>
-            </div>
-
-            <div class="explorer-toolbar">
-                <span>＋ New</span>
-                <span>✂</span>
-                <span>▣</span>
-                <span>▢</span>
-                <span>Sort⌄</span>
-                <span>View⌄</span>
-                <span>•••</span>
-            </div>
-
-            <div class="explorer-body">
-
-                <aside class="explorer-sidebar">
-                    <p class="selected">🏠 Home</p>
-                    <p>🖼 Gallery</p>
-                    <p>☁ Fredrik</p>
-
-                    <hr>
-
-                    <p>🖥 Desktop</p>
-                    <p>↓ Downloads</p>
-                    <p>📄 Documents</p>
-                    <p>🖼 Pictures</p>
-                    <p>♫ Music</p>
-                </aside>
-
-                <main class="explorer-files">
-                    <h3>⌄ Quick access</h3>
-
-                    <div class="folder-grid">
-                        <div>📁 <span>Desktop</span></div>
-                        <div>📁 <span>Downloads</span></div>
-                        <div>📁 <span>Documents</span></div>
-                        <div>📁 <span>Pictures</span></div>
-                        <div>📁 <span>Music</span></div>
-                        <div>📁 <span>Videos</span></div>
-                    </div>
-                </main>
-
-            </div>
-
-            <div class="explorer-status">
-                31 items
-            </div>
-
-        </div>
     </div>
 </body>
 

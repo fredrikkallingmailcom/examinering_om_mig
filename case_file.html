@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>About me</title>
+    <title>Ka-OS 1.0 - Case file</title>
     <meta charset="UTF-8">
     <meta name="description" content="The mystery and answers of the question: who is Fredrik Kallin?">
-    <link href="icon.png" rel="icon" type="image/png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
@@ -15,14 +14,14 @@
     <div class="screen">
         <header class="system_bar">
             <span class="system_logo">
-                <a href="index.html"><img src="images/KaOS_logo.png" id="KaOS_logo" alt="Logo"></a>
+                <a href="index.html"><img src="images/KaOS_logo.png" id="kaos_logo" alt="Logo"></a>
             </span>
             <time class="system_time" datetime="">
                 14:02
             </time>
             <p class="system_status">case-file</p>
             <nav class="system_bar_nav">
-                <a href="index.html">Case file</a>
+                <a href="case_file.html" aria-current="page">Case file</a>
                 <a href="desktop.html">Desktop</a>
                 <a href="terminal.html">Terminal</a>
             </nav>
@@ -30,26 +29,27 @@
         <main class="main_screen_content case_file">
             <section class="case_summary">
                 <h1>CASE FILE #KALLIN-1980</h1>
-                <blockquote>
-                    <p>"Find the hiddens secres of Fredrik"</p>
-                </blockquote>
+
+                <p>"Find the hiddens secrets of Fredrik"</p>
+
                 <h2>Status</h2>
-                <label>Status</label>
-                <progress id="status-progress" value="10" max="100">10%</progress>
-                <span id="status-recovery-text">10%</span>
+                <label for="status_progress">Status</label>
+                <progress id="status_progress" value="10" max="100">10%</progress>
+                <span id="status_recovery-text">10%</span>
                 <hr class="simple_divider">
                 <h2>Hints</h2>
-                <ul role="list">
+                <ul>
                     <li>Check images</li>
                     <li>Look outside the box</li>
                     <li>Everything is connected</li>
                 </ul>
             </section>
+             <!--The SVGs are AI-generated. -->
             <section class="case_menu">
                 <nav class="case_menu_nav" aria-label="Main system menu">
                     <ul>
                         <li>
-                            <a href="index.html">
+                            <a href="case_file.html">
                                 <svg class="svg_icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M3 6H9L11 8H21V19H3Z" fill="none" stroke="currentColor" stroke-width="2" />
                                     <path d="M6 12H18" stroke="currentColor" stroke-width="2" />
