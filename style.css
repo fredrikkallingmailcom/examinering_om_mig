@@ -17,14 +17,22 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+
     background-color: #020303;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url("images/room_background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
     color: var(--text-main);
     font-family: "Courier New", "Lucida Console", Monaco, monospace;
     line-height: 1.4;
 }
 
 /* MISC, IE. ACCESSIBILITY */
-.visually_hidden { /* Hides things I don´t want visible. */
+.visually_hidden {
+    /* Hides things I don´t want visible. */
     position: absolute;
     width: 1px;
     height: 1px;
@@ -58,8 +66,7 @@ button:focus-visible {
 
     border-radius: 48px 48px 28px 28px;
 
-    background: #292a28;
-    padding: 8px;
+    padding: 3px;
 
     box-shadow:
         0 0 0 5px #514b3e,
@@ -141,6 +148,8 @@ button:focus-visible {
 
     min-height: 0;
 
+    background-color: #292a28;
+
     border-top: 2px solid #f5f1e6;
     border-left: 2px solid #f5f1e6;
     border-right: 2px solid #6f6a5c;
@@ -198,7 +207,7 @@ button:focus-visible {
 }
 
 #username,
-#password, 
+#password,
 #login_form button {
     position: absolute;
     background: transparent;
@@ -532,7 +541,7 @@ button:focus-visible {
     overflow: hidden;
 }
 
-.terminal_window > section {
+.terminal_window>section {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
@@ -546,18 +555,14 @@ button:focus-visible {
 
     background-color: #eadbb7;
     background-image:
-        linear-gradient(
-            to right,
+        linear-gradient(to right,
             transparent 55px,
             rgba(180, 45, 45, 0.5) 56px,
-            transparent 58px
-        ),
-        repeating-linear-gradient(
-            to bottom,
+            transparent 58px),
+        repeating-linear-gradient(to bottom,
             transparent 0px,
             transparent 31px,
-            rgba(80, 100, 130, 0.2) 32px
-        );
+            rgba(80, 100, 130, 0.2) 32px);
 
     border: 1px solid #ad9870;
     box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.3);
@@ -587,7 +592,7 @@ button:focus-visible {
 }
 
 @media (max-width: 600px) {
-    .terminal_window > section {
+    .terminal_window>section {
         padding: 0.5rem;
     }
 
@@ -790,10 +795,10 @@ button:focus-visible {
         gap: 1rem;
     }
 
-.system_bar_nav {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.3rem;
-}
+    .system_bar_nav {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
 }
