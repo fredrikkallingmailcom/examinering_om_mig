@@ -191,6 +191,7 @@ function renderTerminalHistory(history, command) {
             let input = document.createElement("input");
 
             input.setAttribute("aria-label", "terminal input");
+            input.setAttribute("type", "text");
             input.classList.add("terminal_input");
 
             addEventListener(input);

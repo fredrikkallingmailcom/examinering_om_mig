@@ -13,15 +13,26 @@
 
 <body>
     <main class="login_screen">
+        <h1 class="visually_hidden">Ka OS 1.0 Login</h1>
+        <div class="visually_hidden">
+    <h2>Password clues</h2>
+    <ul>
+        <li>Teacher: Lesson plans</li>
+        <li>Coffee: Midnight roast</li>
+        <li>Ice cream: Life is better with ice cream</li>
+        <li>Cats: Cat nap, meow</li>
+    </ul>
+</div>
         <div class="login_container">
             <img src="images/index_background_4.png" alt="">
             <!-- Will add the text clues to help with accessability (since the clues are on the image ) --> 
 
-            <form id="login_form"><!-- The login fields are inactive -->
-                <label for="username">Username</label>
-                <input id="username" name="username" type="text" autocomplete="username" required>
+            <form id="login_form">
+                <!-- The login fields are inactive -->
+                <label for="username" class="visually_hidden">Username</label>
+                <input id="username" name="username" type="text" autocomplete="username" value="any password + enter" required>
 
-                <label for="password">Password</label>
+                <label for="password" class="visually_hidden">Password</label>
                 <input id="password" type="password" name="password" autocomplete="current password" required>
 
                 <button type="submit">Login</button>

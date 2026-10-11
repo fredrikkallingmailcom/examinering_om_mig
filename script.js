@@ -4,6 +4,7 @@
 
 //Dynamically change background of case_file´s case_summary
 const backgroundCaseSummary = document.querySelector(".case_summary");
+const login_form = document.querySelector("#login_form");
 
 //Fields
 const backgroundsArray = [
@@ -14,7 +15,9 @@ const backgroundsArray = [
 ];
 
 //Functioncalls
-randomizeBackground(backgroundsArray, backgroundCaseSummary);
+if (backgroundCaseSummary) {
+    randomizeBackground(backgroundsArray, backgroundCaseSummary);
+}
 
 // METHODS / FUNCTIONS //
 
@@ -25,3 +28,9 @@ function randomizeBackground(array, element) {
 
     element.style.backgroundImage = `url("${randomBackground}")`;
 }
+
+//Loggin
+login_form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    window.location.replace("desktop.html");
+});

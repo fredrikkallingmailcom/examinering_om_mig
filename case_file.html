@@ -14,9 +14,9 @@
     <div class="screen">
         <header class="system_bar">
             <span class="system_logo">
-                <a href="index.html"><img src="images/KaOS_logo.png" id="kaos_logo" alt="Logo"></a>
+                <a href="index.html"><img src="images/kaos_logo.png" id="kaos_logo" alt="KaOs 1.0"></a>
             </span>
-            <time class="system_time" datetime="">
+            <time class="system_time" datetime="14:02">
                 14:02
             </time>
             <p class="system_status">case-file</p>
@@ -30,13 +30,14 @@
             <section class="case_summary">
                 <h1>CASE FILE #KALLIN-1980</h1>
 
-                <p>"Find the hiddens secrets of Fredrik"</p>
+                <p>"Find the hidden secrets of Fredrik"</p>
 
                 <h2>Status</h2>
-                <label for="status_progress">Status</label>
-                <progress id="status_progress" value="10" max="100">10%</progress>
-                <span id="status_recovery-text">10%</span>
+                <progress id="status_progress" aria-label="recovery progress" value="10" max="100">10%</progress>
+                <span id="status_recovery_text">10%</span>
+                
                 <hr class="simple_divider">
+
                 <h2>Hints</h2>
                 <ul>
                     <li>Check images</li>
@@ -55,7 +56,6 @@
                                     <path d="M6 12H18" stroke="currentColor" stroke-width="2" />
                                     <path d="M6 15H14" stroke="currentColor" stroke-width="2" />
                                 </svg>
-                                <!--<img src="images/case_file_simple.png" alt="case_files_icon" class="menu_icon">-->
                                 <span>[CASE FILES]</span>
                             </a>
                         </li>
@@ -68,7 +68,6 @@
                                         stroke-width="2" />
                                     <circle cx="12" cy="15" r="1.2" fill="currentColor" />
                                 </svg>
-                                <!-- <img src="images/evidence_simple.png" alt="evidence_icon" class="menu_icon">-->
                                 <span>[EVIDENCE]</span>
                             </a>
                         </li>
@@ -81,7 +80,6 @@
                                     <path d="M12 14 H17" stroke="currentColor" stroke-width="2" />
                                     <path d="M8 21 H16" stroke="currentColor" stroke-width="2" />
                                 </svg>
-                                <!--<img src="images/terminal_simple.png" alt="terminal_icon" class="menu_icon">-->
                                 <span>[TERMINAL]</span>
                             </a>
                         </li>
@@ -94,7 +92,6 @@
                                     <path d="M6 17L11 12L14 15L17 12L19 17" fill="none" stroke="currentColor"
                                         stroke-width="2" />
                                 </svg>
-                                <!--<img src="images/photos_simple.png" alt="photos_icon" class="menu_icon">-->
                                 <span>[PHOTOS]</span>
                             </a>
                         </li>
@@ -107,7 +104,6 @@
                                     <path d="M9 14H15" stroke="currentColor" stroke-width="2" />
                                     <path d="M9 17H13" stroke="currentColor" stroke-width="2" />
                                 </svg>
-                                <!--<img src="images/notes_simple.png" alt="notes_icon" class="menu_icon">-->
                                 <span>[NOTES]</span>
                             </a>
                         </li>
@@ -120,6 +116,7 @@
                     <path d="M4 7L12 13L20 7" fill="none" stroke="currentColor" stroke-width="2" />
                 </svg>
                 <div>
+                    <h2>Messages</h2>
                     <h3 class="mail_headline">Re: Hello</h3>
                     <p class="mail_message">Hello, my name is ... and ...</p>
                 </div>
