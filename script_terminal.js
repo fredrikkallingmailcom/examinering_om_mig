@@ -506,3 +506,9 @@ closeTerminalButton.addEventListener("click", () => {
     event.preventDefault();
     window.location.replace("desktop.html");
 })
+
+closeTerminalButton.addEventListener("click", () => {
+    terminalWindow.classList.add("close");
+    event.preventDefault();
+    window.location.replace("desktop.html");
+})
